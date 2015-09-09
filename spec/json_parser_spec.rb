@@ -1,11 +1,19 @@
 require 'spec_helper'
 
 describe JsonParser do
-  it 'has a version number' do
-    expect(JsonParser::VERSION).not_to be nil
+  context 'given an object' do
+    it 'parses an empty object' do
+      object = '{}'
+
+      expect(JsonParser.parse(object)).to eq({})
+    end
   end
 
-  it 'does something useful' do
-    expect(false).to eq(true)
+  context 'given a collection' do
+    it 'parses the empty collection' do
+      collection = '[]'
+
+      expect(JsonParser.parse(collection)).to eq([])
+    end
   end
 end
