@@ -23,7 +23,18 @@ class JsonParser
 
   def parse_array(input)
     values = unwrap(input).split(',')
-    values.map { |_| true }
+    values.map { |value| parse_value(value) }
+  end
+
+  def parse_value(input)
+    case input
+    when 'true'
+      true
+    when 'false'
+      false
+    else
+      nil
+    end
   end
 
   def first_character

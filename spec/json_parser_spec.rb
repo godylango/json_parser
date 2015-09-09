@@ -28,13 +28,25 @@ describe JsonParser do
 
         expect(JsonParser.parse(collection)).to eq([true])
       end
+
+      it 'can parse a false value' do
+        collection = '[false]'
+
+        expect(JsonParser.parse(collection)).to eq([false])
+      end
     end
 
-    context 'with two values' do
+    context 'with multiple values' do
       it 'can parse two true values' do
         collection = '[true,true]'
 
         expect(JsonParser.parse(collection)).to eq([true, true])
+      end
+
+      it 'can parse mixed boolean values' do
+        collection = '[true,false]'
+
+        expect(JsonParser.parse(collection)).to eq([true, false])
       end
     end
   end
