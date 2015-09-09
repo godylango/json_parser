@@ -23,9 +23,9 @@ describe JsonParser do
     end
 
     it 'parses a collection of booleans and integers' do
-      collection = '[true,false,1]'
+      collection = '[true,false,1,"foo"]'
 
-      expect(JsonParser.parse(collection)).to eq([true, false, 1])
+      expect(JsonParser.parse(collection)).to eq([true, false, 1, 'foo'])
     end
   end
 end

@@ -26,6 +26,18 @@ describe JsonParser::ArrayParser do
 
       expect(parser.parse(collection)).to eq([123])
     end
+
+    it 'parses a string value' do
+      collection = '["hello"]'
+
+      expect(parser.parse(collection)).to eq(['hello'])
+    end
+
+    it 'parses a string value containing a space' do
+      collection = '["hello world"]'
+
+      expect(parser.parse(collection)).to eq(['hello world'])
+    end
   end
 
   context 'with multiple values' do

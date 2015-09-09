@@ -19,12 +19,22 @@ class JsonParser
       number.to_i
     end
 
+    def read_string(string)
+      unwrap_string(string)
+    end
+
+    def unwrap_string(string)
+      string[1..-2]
+    end
+
     def parse_value(value)
       case value
       when 'true'
         true
       when 'false'
         false
+      when /\A"[\w\s]+"\z/
+        read_string(value)
       when /\A\d+\z/
         read_number(value)
       end
