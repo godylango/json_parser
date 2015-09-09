@@ -2,8 +2,10 @@ module JsonParser
   def self.parse(input)
     if input == '[]'
       []
-    else
+    elsif input == '{}'
       {}
+    else
+      nil
     end
   end
 end
