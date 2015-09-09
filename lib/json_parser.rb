@@ -1,5 +1,6 @@
 require 'json_parser/array_parser'
 require 'json_parser/value_parser'
+require 'json_parser/object_parser'
 
 class JsonParser
   def self.parse(input)
@@ -15,7 +16,7 @@ class JsonParser
     when '['
       ArrayParser.parse(input)
     when '{'
-      {}
+      ObjectParser.parse(input)
     else
       nil
     end

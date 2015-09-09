@@ -13,6 +13,18 @@ describe JsonParser do
 
       expect(JsonParser.parse(object)).to eq({})
     end
+
+    it 'parses a single key-value pair' do
+      object = '{"foo":true}'
+
+      expect(JsonParser.parse(object)).to eq({ "foo" => true })
+    end
+
+    it 'parses multiple key-value pairs' do
+      object = '{"foo":1,"bar":"fizz"}'
+
+      expect(JsonParser.parse(object)).to eq({ "foo" => 1, "bar" => "fizz" })
+    end
   end
 
   context 'given a collection' do
