@@ -1,7 +1,3 @@
-require 'json_parser/array_parser'
-require 'json_parser/value_parser'
-require 'json_parser/object_parser'
-
 class JsonParser
   def self.parse(input)
     new(input).parse
@@ -29,3 +25,8 @@ class JsonParser
     input[0]
   end
 end
+
+require 'json_parser/base_parser'
+require 'json_parser/array_parser'
+require 'json_parser/value_parser'
+require 'json_parser/object_parser'

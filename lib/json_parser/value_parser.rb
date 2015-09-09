@@ -1,14 +1,6 @@
 class JsonParser
-  class ValueParser
-    def self.parse(input)
-      new(input).parse_value
-    end
-
-    def initialize(input)
-      @input = input
-    end
-
-    def parse_value
+  class ValueParser < BaseParser
+    def parse
       case input
       when 'true'
         true
@@ -22,7 +14,6 @@ class JsonParser
     end
 
     private
-    attr_reader :input
 
     def read_number(number)
       number.to_i
