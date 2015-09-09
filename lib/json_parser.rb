@@ -4,19 +4,33 @@ class JsonParser
   end
 
   def initialize(input)
-    if input == '[]'
-      self.parsed_input = []
-    elsif input == '{}'
-      self.parsed_input = {}
-    else
-      self.parsed_input = nil
-    end
+    @input = input
   end
 
   def parse
-    parsed_input
+    case first_character
+    when '['
+      parse_array(input)
+    when '{'
+      {}
+    else
+      nil
+    end
   end
 
   private
-  attr_accessor :parsed_input
+  attr_reader :input
+
+  def parse_array(input)
+    values = unwrap(input).split(',')
+    values.map { |_| true }
+  end
+
+  def first_character
+    input[0]
+  end
+
+  def unwrap(structure)
+    structure[1..-2]
+  end
 end

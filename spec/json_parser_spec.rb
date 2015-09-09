@@ -16,10 +16,26 @@ describe JsonParser do
   end
 
   context 'given a collection' do
-    it 'parses the empty collection' do
+    it 'can parse an empty collection' do
       collection = '[]'
 
       expect(JsonParser.parse(collection)).to eq([])
+    end
+
+    context 'with one value' do
+      it 'can parse a true value' do
+        collection = '[true]'
+
+        expect(JsonParser.parse(collection)).to eq([true])
+      end
+    end
+
+    context 'with two values' do
+      it 'can parse two true values' do
+        collection = '[true,true]'
+
+        expect(JsonParser.parse(collection)).to eq([true, true])
+      end
     end
   end
 end
