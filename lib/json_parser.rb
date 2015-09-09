@@ -1,4 +1,5 @@
 require 'json_parser/array_parser'
+require 'json_parser/value_parser'
 
 class JsonParser
   def self.parse(input)

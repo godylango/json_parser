@@ -8,61 +8,36 @@ describe JsonParser::ArrayParser do
     expect(parser.parse(collection)).to eq([])
   end
 
-  context 'with one value' do
-    it 'parses a true value' do
-      collection = '[true]'
+  it 'passes values to JsonParser::ValueParser' do
+    collection = '[1]'
+    allow(JsonParser::ValueParser).to receive(:parse).with('1')
 
-      expect(parser.parse(collection)).to eq([true])
-    end
+    parser.parse(collection)
 
-    it 'parses a false value' do
-      collection = '[false]'
-
-      expect(parser.parse(collection)).to eq([false])
-    end
-
-    it 'parses an integer value' do
-      collection = '[123]'
-
-      expect(parser.parse(collection)).to eq([123])
-    end
-
-    it 'parses a string value' do
-      collection = '["hello"]'
-
-      expect(parser.parse(collection)).to eq(['hello'])
-    end
-
-    it 'parses a string value containing a space' do
-      collection = '["hello world"]'
-
-      expect(parser.parse(collection)).to eq(['hello world'])
-    end
+    expect(JsonParser::ValueParser).to have_received(:parse).with('1')
   end
 
-  context 'with multiple values' do
-    it 'parses two true values' do
-      collection = '[true,true]'
+  it 'parses a boolean value' do
+    collection = '[true]'
 
-      expect(parser.parse(collection)).to eq([true, true])
-    end
+    expect(parser.parse(collection)).to eq([true])
+  end
 
-    it 'parses mixed boolean values' do
-      collection = '[true,false]'
+  it 'parses an integer value' do
+    collection = '[123]'
 
-      expect(parser.parse(collection)).to eq([true, false])
-    end
+    expect(parser.parse(collection)).to eq([123])
+  end
 
-    it 'parses multiple integers' do
-      collection = '[1,2]'
+  it 'parses a string value' do
+    collection = '["hello world"]'
 
-      expect(parser.parse(collection)).to eq([1, 2])
-    end
+    expect(parser.parse(collection)).to eq(['hello world'])
+  end
 
-    it 'parses mixed integers and booleans' do
-      collection = '[true,false,1]'
+  it 'parses multiple mixed values' do
+    collection = '[true,false,1,"hello world"]'
 
-      expect(parser.parse(collection)).to eq([true, false, 1])
-    end
+    expect(parser.parse(collection)).to eq([true, false, 1, 'hello world'])
   end
 end
