@@ -1,14 +1,17 @@
 class JsonParser
   class ValueParser < BaseParser
+    STRING_MATCHER = /\A"[\w\s]+"\z/
+    NUMBER_MATCHER = /\A\d+\z/
+
     def parse
       case input
       when 'true'
         true
       when 'false'
         false
-      when /\A"[\w\s]+"\z/
+      when STRING_MATCHER
         read_string(input)
-      when /\A\d+\z/
+      when NUMBER_MATCHER
         read_number(input)
       end
     end

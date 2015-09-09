@@ -1,8 +1,10 @@
 class JsonParser
   class ObjectParser < BaseParser
+    KEY_VALUE_PAIR_MATCHER = /"\w+":"?\w+"?/
+
     def parse
-      unwrap(input).split(/,/).inject({}) do |pairs, value|
-        if /"\w+":"?\w+"?/.match(value)
+      unwrap(input).split(',').inject({}) do |pairs, value|
+        if KEY_VALUE_PAIR_MATCHER.match(value)
           pair = value.split(':')
           pairs.merge(unwrap(pair.first) => ValueParser.parse(pair.last))
         end
