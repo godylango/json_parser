@@ -8,7 +8,7 @@ describe JsonParser do
   end
 
   context 'given an object' do
-    it 'can parse an empty object' do
+    it 'parses an empty object' do
       object = '{}'
 
       expect(JsonParser.parse(object)).to eq({})
@@ -16,26 +16,26 @@ describe JsonParser do
   end
 
   context 'given a collection' do
-    it 'can parse an empty collection' do
+    it 'parses an empty collection' do
       collection = '[]'
 
       expect(JsonParser.parse(collection)).to eq([])
     end
 
     context 'with one value' do
-      it 'can parse a true value' do
+      it 'parses a true value' do
         collection = '[true]'
 
         expect(JsonParser.parse(collection)).to eq([true])
       end
 
-      it 'can parse a false value' do
+      it 'parses a false value' do
         collection = '[false]'
 
         expect(JsonParser.parse(collection)).to eq([false])
       end
 
-      it 'can parse an integer value' do
+      it 'parses an integer value' do
         collection = '[123]'
 
         expect(JsonParser.parse(collection)).to eq([123])
