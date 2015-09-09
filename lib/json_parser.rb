@@ -32,9 +32,13 @@ class JsonParser
       true
     when 'false'
       false
-    else
-      nil
+    when /\A\d+\z/
+      read_number(input)
     end
+  end
+
+  def read_number(input)
+    input.to_i
   end
 
   def first_character
