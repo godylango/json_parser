@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require "json_parser"
+
+require "irb"
+IRB.start
