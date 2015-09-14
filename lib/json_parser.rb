@@ -4,30 +4,24 @@ class JsonParser
   end
 
   def initialize(input)
-    @input = input
+    tokens = Tokenizer.tokenize(input)
+
+    parsed_tokens = tokens.map do |token|
+      TokenParser.new(token)
+    end
+
+    @root = TreeConstructor.new(parsed_tokens).root
   end
 
   def parse
-    case first_character
-    when '['
-      ArrayParser.parse(input)
-    when '{'
-      ObjectParser.parse(input)
-    else
-      nil
+    if root
+      root.value
     end
   end
 
   private
-  attr_reader :input
 
-  def first_character
-    input[0]
-  end
+  attr_reader :tokens, :root
 end
 
-require 'json_parser/base_parser'
-require 'json_parser/array_parser'
-require 'json_parser/value_parser'
-require 'json_parser/object_parser'
-require 'json_parser/tokenizer'
+require 'requirements'
