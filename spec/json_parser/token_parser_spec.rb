@@ -46,16 +46,20 @@ describe JsonParser::TokenParser do
   end
 
   context 'given a closing bracket token' do
-    it 'advises you to move the pointer up' do
-      expect(parse_token([:array, ']']).should_move_up?).to be_truthy
-    end
+    [[:array, ']'], [:object, '}']].each do |token|
+      context "#{token}" do
+        it 'advises you to move the pointer up' do
+          expect(parse_token(token).should_move_up?).to be_truthy
+        end
 
-    it 'should not advise you to push the parsed node' do
-      expect(parse_token([:array, ']']).should_push?).to be_falsey
-    end
+        it 'should not advise you to push the parsed node' do
+          expect(parse_token(token).should_push?).to be_falsey
+        end
 
-    it 'should not have a node' do
-      expect(parse_token([:array, ']']).node).to be_nil
+        it 'should not have a node' do
+          expect(parse_token(token).node).to be_nil
+        end
+      end
     end
   end
 

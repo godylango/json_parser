@@ -21,7 +21,7 @@ class JsonParser
   attr_reader :tokens, :root
 
   def construct_tree
-    pointer = @root
+    pointer = root
 
     tokens.each do |token|
       parsed = TokenParser.new(token)
@@ -38,8 +38,14 @@ class JsonParser
   end
 
   def get_root
-    if tokens.shift && tokens.pop
-      root = ArrayNode.new
+    first_token = tokens.shift
+    if first_token
+      tokens.pop
+      if first_token.first == :array
+        ArrayNode.new
+      elsif first_token.first == :object
+        ObjectNode.new
+      end
     end
   end
 end

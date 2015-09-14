@@ -54,4 +54,24 @@ describe JsonParser do
 
     expect(JsonParser.parse(collection)).to eq([123, [456, [false, 987], [789], 'hey']])
   end
+
+  it 'parses an empty object' do
+    object = '{}'
+
+    expect(JsonParser.parse(object)).to eq({})
+  end
+
+  it 'parses an object with key value pairs' do
+    object = '{"hello": 1, "foo": "bar"}'
+
+    expect(JsonParser.parse(object)).to eq({"hello" => 1, "foo" => "bar"})
+  end
+
+  it 'parses an object with nesting' do
+    object = '{"hello": [1, 2, true], "foo": {"bar": "doodle"}, "fizz": "buzz"}'
+
+    expect(JsonParser.parse(object)).to eq({"hello" => [1, 2, true],
+                                            "foo" => {"bar" => "doodle"},
+                                            "fizz" => "buzz"})
+  end
 end

@@ -22,6 +22,14 @@ class JsonParser
         else
           @should_move_up = true
         end
+      elsif token_type == :object
+        if string_value == '{'
+          @should_push = true
+          @should_move_down = true
+          @node = JsonParser::ObjectNode.new
+        else
+          @should_move_up = true
+        end
       end
     end
 
